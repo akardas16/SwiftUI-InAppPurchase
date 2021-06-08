@@ -4,7 +4,7 @@ Offer in-app purchases and manage entitlements using signed transactions and sta
 
 ## Overview
 
-- Note: This sample code project is associated with WWDC21 session [5011: Meet StoreKit 2](https://developer.apple.com/wwdc21/5011/).
+- Note: This sample code project is associated with WWDC21 session [10114: Meet StoreKit 2](https://developer.apple.com/wwdc21/10114/).
 
 ## Configure the Sample Code Project
 
