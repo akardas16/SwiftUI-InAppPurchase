@@ -2,7 +2,7 @@
 See LICENSE folder for this sample’s licensing information.
 
 Abstract:
-A view showing the total supply of each type of fuel purchased.
+A view showing the total supply of each type of purchased fuel.
 */
 
 import SwiftUI

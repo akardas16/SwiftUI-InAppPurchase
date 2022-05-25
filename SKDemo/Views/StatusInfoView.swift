@@ -2,7 +2,7 @@
 See LICENSE folder for this sample’s licensing information.
 
 Abstract:
-A view to display a Status in plain text.
+A view to display a status in plain text.
 */
 
 import SwiftUI

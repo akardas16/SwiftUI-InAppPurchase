@@ -2,7 +2,7 @@
 See LICENSE folder for this sample’s licensing information.
 
 Abstract:
-The style of the product buttons displayed in the store view.
+The style of the product buttons that display in the store view.
 */
 
 import StoreKit
