@@ -45,12 +45,7 @@ class Store: ObservableObject {
     private let productIdToEmoji: [String: String]
 
     init() {
-        if let path = Bundle.main.path(forResource: "Products", ofType: "plist"),
-        let plist = FileManager.default.contents(atPath: path) {
-            productIdToEmoji = (try? PropertyListSerialization.propertyList(from: plist, format: nil) as? [String: String]) ?? [:]
-        } else {
-            productIdToEmoji = [:]
-        }
+        productIdToEmoji = Store.loadProductIdToEmojiData()
 
         //Initialize empty products, and then do a product request asynchronously to fill them in.
         cars = []
@@ -72,6 +67,15 @@ class Store: ObservableObject {
 
     deinit {
         updateListenerTask?.cancel()
+    }
+    
+    static func loadProductIdToEmojiData() -> [String: String] {
+        guard let path = Bundle.main.path(forResource: "Products", ofType: "plist"),
+              let plist = FileManager.default.contents(atPath: path),
+              let data = try? PropertyListSerialization.propertyList(from: plist, format: nil) as? [String: String] else {
+            return [:]
+        }
+        return data
     }
 
     func listenForTransactions() -> Task<Void, Error> {

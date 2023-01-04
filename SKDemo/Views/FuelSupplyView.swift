@@ -87,3 +87,12 @@ struct FuelSupplyView: View {
         }
     }
 }
+
+struct FuelSupplyView_Previews: PreviewProvider {
+    @StateObject static var store = Store()
+    
+    static var previews: some View {
+        FuelSupplyView(fuels: store.fuel, consumedFuel: { _ in })
+            .environmentObject(store)
+    }
+}

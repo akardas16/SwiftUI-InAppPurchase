@@ -101,3 +101,9 @@ struct MyCarsView: View {
     }
 }
 
+struct MyCarsView_Previews: PreviewProvider {
+    static var previews: some View {
+        MyCarsView()
+    }
+}
+

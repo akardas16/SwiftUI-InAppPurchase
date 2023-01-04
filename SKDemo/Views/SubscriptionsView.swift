@@ -107,3 +107,28 @@ struct SubscriptionsView: View {
     }
 }
 
+struct SubscriptionsView_Previews: PreviewProvider {
+    @StateObject static var store = Store()
+    @State static var subscription: Product?
+    
+    static var previews: some View {
+        Group {
+            // View with no active subscriptions
+            SubscriptionsView()
+                .previewDisplayName("No active subscriptions")
+            
+            // View with an active subscription
+            if let subscription {
+                SubscriptionsView(currentSubscription: subscription, status: nil)
+                    .previewDisplayName("With an active subscription")
+            }
+        }
+        .environmentObject(store)
+        .task {
+            guard let product = store.purchasedSubscriptions.first else {
+                return
+            }
+            subscription = product
+        }
+    }
+}

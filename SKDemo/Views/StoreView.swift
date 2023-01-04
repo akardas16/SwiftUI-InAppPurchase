@@ -42,3 +42,11 @@ struct StoreView: View {
     }
 }
 
+struct StoreView_Previews: PreviewProvider {
+    @StateObject static var store = Store()
+    
+    static var previews: some View {
+        StoreView()
+            .environmentObject(store)
+    }
+}

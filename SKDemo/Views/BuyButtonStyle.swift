@@ -27,3 +27,24 @@ struct BuyButtonStyle: ButtonStyle {
             .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
     }
 }
+
+struct BuyButtonStyle_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            Button(action: {}) {
+                Text("Buy")
+                    .foregroundColor(.white)
+                    .bold()
+            }
+            .buttonStyle(BuyButtonStyle())
+            .previewDisplayName("Normal")
+            
+            Button(action: {}) {
+                Image(systemName: "checkmark")
+                    .foregroundColor(.white)
+            }
+            .buttonStyle(BuyButtonStyle(isPurchased: true))
+            .previewDisplayName("Purchased")
+        }
+    }
+}
