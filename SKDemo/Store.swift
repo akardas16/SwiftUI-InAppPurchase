@@ -30,10 +30,10 @@ public enum SubscriptionTier: Int, Comparable {
 
 class Store: ObservableObject {
 
-    @Published private(set) var cars: [Product]
-    @Published private(set) var fuel: [Product]
-    @Published private(set) var subscriptions: [Product]
-    @Published private(set) var nonRenewables: [Product]
+    @Published private(set) var cars: [Product] = []
+    @Published private(set) var fuel: [Product] = []
+    @Published private(set) var subscriptions: [Product] = []
+    @Published private(set) var nonRenewables: [Product] = []
     
     @Published private(set) var purchasedCars: [Product] = []
     @Published private(set) var purchasedNonRenewableSubscriptions: [Product] = []
@@ -41,42 +41,36 @@ class Store: ObservableObject {
     @Published private(set) var subscriptionGroupStatus: RenewalState?
     
     var updateListenerTask: Task<Void, Error>? = nil
+    @Published var identifiers:[String] = []
+    @Published var isLoaded = false
 
-    private let productIdToEmoji: [String: String]
+   
 
     init() {
-        productIdToEmoji = Store.loadProductIdToEmojiData()
+       
 
-        //Initialize empty products, and then do a product request asynchronously to fill them in.
-        cars = []
-        fuel = []
-        subscriptions = []
-        nonRenewables = []
+        //Get Identifiers from your backend
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+            self.identifiers = ["consumable.fuel.octane87","consumable.fuel.octane89","consumable.fuel.octane91","nonconsumable.car","nonconsumable.utilityvehicle","nonconsumable.racecar","subscription.standard","subscription.premium","subscription.pro","nonRenewing.standard"]
 
-        //Start a transaction listener as close to app launch as possible so you don't miss any transactions.
-        updateListenerTask = listenForTransactions()
+            //Start a transaction listener as close to app launch as possible so you don't miss any transactions.
+            self.updateListenerTask = self.listenForTransactions()
 
-        Task {
-            //During store initialization, request products from the App Store.
-            await requestProducts()
+            Task {
+                //During store initialization, request products from the App Store.
+                await self.requestProducts()
 
-            //Deliver products that the customer purchases.
-            await updateCustomerProductStatus()
+                //Deliver products that the customer purchases.
+                await self.updateCustomerProductStatus()
+            }
         }
+        
     }
 
     deinit {
         updateListenerTask?.cancel()
     }
     
-    static func loadProductIdToEmojiData() -> [String: String] {
-        guard let path = Bundle.main.path(forResource: "Products", ofType: "plist"),
-              let plist = FileManager.default.contents(atPath: path),
-              let data = try? PropertyListSerialization.propertyList(from: plist, format: nil) as? [String: String] else {
-            return [:]
-        }
-        return data
-    }
 
     func listenForTransactions() -> Task<Void, Error> {
         return Task.detached {
@@ -102,8 +96,9 @@ class Store: ObservableObject {
     func requestProducts() async {
         do {
             //Request products from the App Store using the identifiers that the Products.plist file defines.
-            let storeProducts = try await Product.products(for: productIdToEmoji.keys)
+            let storeProducts = try await Product.products(for: identifiers)
 
+            self.isLoaded = true
             var newCars: [Product] = []
             var newSubscriptions: [Product] = []
             var newNonRenewables: [Product] = []
@@ -246,9 +241,7 @@ class Store: ObservableObject {
         subscriptionGroupStatus = try? await subscriptions.first?.subscription?.status.first?.state
     }
 
-    func emoji(for productId: String) -> String {
-        return productIdToEmoji[productId]!
-    }
+ 
 
     func sortByPrice(_ products: [Product]) -> [Product] {
         products.sorted(by: { return $0.price < $1.price })

@@ -2,7 +2,7 @@
 See LICENSE folder for this sample’s licensing information.
 
 Abstract:
-A product view for an individual fuel type.
+A product view for an individual product type.
 */
 
 import SwiftUI
@@ -14,14 +14,13 @@ struct FuelProductView: View {
     @State private var errorTitle = ""
     @State private var isShowingError = false
 
-    let fuel: Product
+    let product: Product
     let onPurchase: (Product) -> Void
 
     var body: some View {
         VStack(spacing: 10) {
-            Text(store.emoji(for: fuel.id))
-                .font(.system(size: 120))
-            Text(fuel.description)
+            Image(systemName: "car.fill").font(.largeTitle).foregroundColor(Color.random)
+            Text(product.description)
                 .bold()
                 .foregroundColor(Color.black)
                 .clipShape(Rectangle())
@@ -47,7 +46,7 @@ struct FuelProductView: View {
                 await purchase()
             }
         }) {
-            Text(fuel.displayPrice)
+            Text(product.displayPrice)
                 .foregroundColor(.white)
                 .bold()
         }
@@ -56,8 +55,8 @@ struct FuelProductView: View {
     @MainActor
     func purchase() async {
         do {
-            if try await store.purchase(fuel) != nil {
-                onPurchase(fuel)
+            if try await store.purchase(product) != nil {
+                onPurchase(product)
             }
         } catch StoreError.failedVerification {
             errorTitle = "Your purchase could not be verified by the App Store."
@@ -65,5 +64,23 @@ struct FuelProductView: View {
         } catch {
             print("Failed fuel purchase: \(error)")
         }
+    }
+}
+
+//struct FuelProductView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FuelProductView(product: "") { product in
+//            
+//        }
+//    }
+//}
+
+extension Color {
+    static var random: Color {
+        return Color(
+            red: .random(in: 0...1),
+            green: .random(in: 0...1),
+            blue: .random(in: 0...1)
+        )
     }
 }

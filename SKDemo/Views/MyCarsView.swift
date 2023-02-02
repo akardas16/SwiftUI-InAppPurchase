@@ -13,30 +13,10 @@ struct MyCarsView: View {
 
     var body: some View {
         NavigationView {
-            if store.purchasedCars.isEmpty && store.purchasedNonRenewableSubscriptions.isEmpty && store.purchasedSubscriptions.isEmpty {
-                VStack {
-                    Text("SK Demo App")
-                        .bold()
-                        .font(.system(size: 50))
-                        .padding(.bottom, 20)
-                    Text("🏎💨")
-                        .font(.system(size: 120))
-                        .padding(.bottom, 20)
-                    Text("Head over to the shop to get started!")
-                        .font(.headline)
-                        .padding()
-                        .multilineTextAlignment(.center)
-                    NavigationLink {
-                        StoreView()
-                    } label: {
-                        Label("Shop", systemImage: "cart")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(width: 300, height: 50, alignment: .center)
-                            .background(Color.blue)
-                            .cornerRadius(15.0)
-                    }
+            if !store.isLoaded {
+                VStack(spacing:36) {
+                    ProgressView().scaleEffect(2)
+                    Text("Products are loading...")
                 }
             } else {
                 List {

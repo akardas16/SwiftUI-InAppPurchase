@@ -19,7 +19,7 @@ struct FuelStoreView: View {
                 .multilineTextAlignment(.center)
             HStack {
                 ForEach(fuels, id: \.id) { fuel in
-                    FuelProductView(fuel: fuel, onPurchase: onPurchase)
+                    FuelProductView(product: fuel, onPurchase: onPurchase)
                 }
             }
         }

@@ -39,7 +39,7 @@ struct FuelSupplyView: View {
                             VStack {
                                 Text(fuel.description)
                                     .foregroundColor(.black)
-                                Text(store.emoji(for: fuel.id))
+//                                Text(store.emoji(for: fuel.id))
                             }
                             .clipShape(Rectangle())
                             .padding([.leading, .trailing], 15)

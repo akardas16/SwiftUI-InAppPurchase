@@ -20,15 +20,13 @@ struct ProductDetailView: View {
 
     let product: Product
     
-    var emoji: String {
-        return store.emoji(for: product.id)
-    }
+
     
     var body: some View {
         ZStack {
             Group {
                 VStack {
-                    Text(showSpeed ? "\(emoji)💨" : emoji)
+                    Text(showSpeed ? "💨" : "----")
                         .font(.system(size: 120))
                         .padding(.bottom, 20)
                         .offset(x: carOffsetX, y: 0)

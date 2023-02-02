@@ -17,9 +17,6 @@ struct ListCellView: View {
     let product: Product
     let purchasingEnabled: Bool
 
-    var emoji: String {
-        store.emoji(for: product.id)
-    }
 
     init(product: Product, purchasingEnabled: Bool = true) {
         self.product = product
@@ -28,11 +25,7 @@ struct ListCellView: View {
 
     var body: some View {
         HStack {
-            Text(emoji)
-                .font(.system(size: 50))
-                .frame(width: 50, height: 50)
-                .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
-                .padding(.trailing, 20)
+            Image(systemName: "car.fill").font(.largeTitle).foregroundColor(Color.random)
             if purchasingEnabled {
                 productDetail
                 Spacer()
