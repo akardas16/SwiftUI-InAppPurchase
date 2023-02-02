@@ -11,7 +11,6 @@
 		790AF0FF261788390020DD40 /* SubscriptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790AF0FE261788390020DD40 /* SubscriptionsView.swift */; };
 		7935D0E32612C12700031437 /* FuelProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7935D0E22612C12700031437 /* FuelProductView.swift */; };
 		7935D0E52612C29F00031437 /* FuelSupplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7935D0E42612C29F00031437 /* FuelSupplyView.swift */; };
-		793663EE261D233100DB96A9 /* BuyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793663ED261D233100DB96A9 /* BuyButtonStyle.swift */; };
 		795B82B2260DAD23004A60DE /* ListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795B82B1260DAD23004A60DE /* ListCellView.swift */; };
 		795B82B4260E7246004A60DE /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795B82B3260E7246004A60DE /* StoreView.swift */; };
 		795B82E426114D2C004A60DE /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795B82E326114D2C004A60DE /* ProductDetailView.swift */; };
@@ -30,7 +29,6 @@
 		790AF0FE261788390020DD40 /* SubscriptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsView.swift; sourceTree = "<group>"; };
 		7935D0E22612C12700031437 /* FuelProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuelProductView.swift; sourceTree = "<group>"; };
 		7935D0E42612C29F00031437 /* FuelSupplyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuelSupplyView.swift; sourceTree = "<group>"; };
-		793663ED261D233100DB96A9 /* BuyButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyButtonStyle.swift; sourceTree = "<group>"; };
 		795B82B1260DAD23004A60DE /* ListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellView.swift; sourceTree = "<group>"; };
 		795B82B3260E7246004A60DE /* StoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
 		795B82E326114D2C004A60DE /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
@@ -102,7 +100,6 @@
 		79770BDA260C3D02007C2E4A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				793663ED261D233100DB96A9 /* BuyButtonStyle.swift */,
 				7935D0E22612C12700031437 /* FuelProductView.swift */,
 				795B82E526115172004A60DE /* FuelStoreView.swift */,
 				7935D0E42612C29F00031437 /* FuelSupplyView.swift */,
@@ -203,7 +200,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				793663EE261D233100DB96A9 /* BuyButtonStyle.swift in Sources */,
 				79770BDF260C3DF7007C2E4A /* Store.swift in Sources */,
 				7935D0E52612C29F00031437 /* FuelSupplyView.swift in Sources */,
 				790AF0FF261788390020DD40 /* SubscriptionsView.swift in Sources */,

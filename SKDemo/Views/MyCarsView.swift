@@ -20,7 +20,7 @@ struct MyCarsView: View {
                 }
             } else {
                 List {
-                    Section("My Cars") {
+                    Section("My Purchased Cars") {
                         if !store.purchasedCars.isEmpty {
                             ForEach(store.purchasedCars) { product in
                                 NavigationLink {
@@ -33,7 +33,7 @@ struct MyCarsView: View {
                             Text("You don't own any car products. \nHead over to the shop to get started!")
                         }
                     }
-                    Section("Navigation Service") {
+                    Section("Navigation Premium Services") {
                         if !store.purchasedNonRenewableSubscriptions.isEmpty || !store.purchasedSubscriptions.isEmpty {
                             ForEach(store.purchasedNonRenewableSubscriptions) { product in
                                 NavigationLink {

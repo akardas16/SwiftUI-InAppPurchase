@@ -18,8 +18,9 @@ struct ListCellView: View {
     let purchasingEnabled: Bool
 
 
-    init(product: Product, purchasingEnabled: Bool = true) {
+    init(product: Product , purchasingEnabled: Bool = true) {
         self.product = product
+        //let p = Product()
         self.purchasingEnabled = purchasingEnabled
     }
 
@@ -30,8 +31,6 @@ struct ListCellView: View {
                 productDetail
                 Spacer()
                 buyButton
-                    .buttonStyle(BuyButtonStyle(isPurchased: isPurchased))
-                    .disabled(isPurchased)
             } else {
                 productDetail
             }
@@ -55,61 +54,32 @@ struct ListCellView: View {
         }
     }
 
-    func subscribeButton(_ subscription: Product.SubscriptionInfo) -> some View {
-        let unit: String
-        let plural = 1 < subscription.subscriptionPeriod.value
-            switch subscription.subscriptionPeriod.unit {
-        case .day:
-            unit = plural ? "\(subscription.subscriptionPeriod.value) days" : "day"
-        case .week:
-            unit = plural ? "\(subscription.subscriptionPeriod.value) weeks" : "week"
-        case .month:
-            unit = plural ? "\(subscription.subscriptionPeriod.value) months" : "month"
-        case .year:
-            unit = plural ? "\(subscription.subscriptionPeriod.value) years" : "year"
-        @unknown default:
-            unit = "period"
-        }
-
-        return VStack {
-            Text(product.displayPrice)
-                .foregroundColor(.white)
-                .bold()
-                .padding(EdgeInsets(top: -4.0, leading: 0.0, bottom: -8.0, trailing: 0.0))
-            Divider()
-                .background(Color.white)
-            Text(unit)
-                .foregroundColor(.white)
-                .font(.system(size: 12))
-                .padding(EdgeInsets(top: -8.0, leading: 0.0, bottom: -4.0, trailing: 0.0))
-        }
-    }
 
     var buyButton: some View {
-        Button(action: {
+        Button {
             Task {
                 await buy()
             }
-        }) {
-            if isPurchased {
-                Text(Image(systemName: "checkmark"))
-                    .bold()
-                    .foregroundColor(.white)
-            } else {
-                if let subscription = product.subscription {
-                    subscribeButton(subscription)
-                } else {
-                    Text(product.displayPrice)
-                        .foregroundColor(.white)
-                        .bold()
+        } label: {
+            Capsule().fill(isPurchased ? .gray:.blue).frame(width: 150, height: 45).overlay {
+                if !isPurchased{ //25.45 US$ / 6 Month
+                    if let subscribtion = product.subscription {
+                        Text("\(product.displayPrice)\n\(subscribtion.subscriptionPeriod.value) \(String(describing: subscribtion.subscriptionPeriod.unit))").font(.subheadline.bold()).foregroundColor(.white).multilineTextAlignment(.center)
+                        
+                    }else{
+                        Text("Purchase").font(.headline.bold()).foregroundColor(.white)
+                    }
+                }else {
+                    Text("Purchased \(Image(systemName: "checkmark"))").font(.headline.bold()).foregroundColor(.white)
                 }
             }
-        }
-        .onAppear {
+
+        }.onAppear {
             Task {
                 isPurchased = (try? await store.isPurchased(product)) ?? false
             }
-        }
+        }.disabled(isPurchased)
+        
     }
 
     func buy() async {

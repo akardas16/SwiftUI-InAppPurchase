@@ -154,7 +154,7 @@
           "codeOffers" : [
 
           ],
-          "displayPrice" : "3.99",
+          "displayPrice" : "12.57",
           "familyShareable" : false,
           "groupNumber" : 2,
           "internalID" : "5449D98C",
@@ -167,7 +167,7 @@
             }
           ],
           "productID" : "subscription.premium",
-          "recurringSubscriptionPeriod" : "P1M",
+          "recurringSubscriptionPeriod" : "P3M",
           "referenceName" : "Premium",
           "subscriptionGroupID" : "3F19ED53",
           "type" : "RecurringSubscription"
@@ -179,7 +179,7 @@
           "codeOffers" : [
 
           ],
-          "displayPrice" : "4.99",
+          "displayPrice" : "25.45",
           "familyShareable" : false,
           "groupNumber" : 1,
           "internalID" : "E0316BF9",
@@ -197,7 +197,7 @@
             }
           ],
           "productID" : "subscription.pro",
-          "recurringSubscriptionPeriod" : "P1M",
+          "recurringSubscriptionPeriod" : "P6M",
           "referenceName" : "Pro",
           "subscriptionGroupID" : "3F19ED53",
           "type" : "RecurringSubscription"

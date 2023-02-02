@@ -33,7 +33,7 @@ struct FuelProductView: View {
                 )
                 .padding(.bottom, 5)
             buyButton
-                .buttonStyle(BuyButtonStyle())
+                
         }
         .alert(isPresented: $isShowingError, content: {
             Alert(title: Text(errorTitle), message: nil, dismissButton: .default(Text("Okay")))
